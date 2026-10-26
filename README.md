@@ -4,10 +4,8 @@ A native macOS app for reclaiming disk space and keeping your Mac tidy. Orbit sc
 
 Built with SwiftUI.
 
-<!-- Replace the placeholders below with real screenshots (e.g. docs/screenshots/*.png). -->
-<p align="center">
-  <img src="docs/screenshots/hero.png" alt="Orbit main window" width="800">
-</p>
+<img width="1470" height="923" alt="Screenshot 2026-10-26 at 9 18 04 PM" src="https://github.com/user-attachments/assets/407a1586-9c14-4b9e-8ae2-adfe9698f82f" />
+
 
 ## Features
 
@@ -24,17 +22,10 @@ Built with SwiftUI.
 
 ## Screenshots
 
-| Smart Care | Developer Cleanup |
-| :---: | :---: |
-| ![Smart Care](docs/screenshots/smart-care.png) | ![Developer Cleanup](docs/screenshots/developer-cleanup.png) |
+<img width="1470" height="923" alt="Screenshot 2026-10-26 at 9 17 46 PM" src="https://github.com/user-attachments/assets/cd821862-fa1b-4620-ae2d-16975fce4897" />
+<img width="1470" height="923" alt="Screenshot 2026-10-26 at 9 18 23 PM" src="https://github.com/user-attachments/assets/81ee415d-b694-4919-8eac-2b56867d260f" />
+<img width="1470" height="923" alt="Screenshot 2026-10-26 at 9 18 38 PM" src="https://github.com/user-attachments/assets/54b0a0ec-3f73-42c7-894d-c2272ca29fce" />
 
-| Space Explorer | Duplicate Finder |
-| :---: | :---: |
-| ![Space Explorer](docs/screenshots/space-explorer.png) | ![Duplicate Finder](docs/screenshots/duplicates.png) |
-
-| Similar Photos | Uninstaller |
-| :---: | :---: |
-| ![Similar Photos](docs/screenshots/similar-photos.png) | ![Uninstaller](docs/screenshots/uninstaller.png) |
 
 ## Requirements
 
