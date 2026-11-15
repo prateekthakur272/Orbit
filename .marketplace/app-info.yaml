@@ -1,0 +1,44 @@
+# Orbit — marketplace listing.
+# Read by the marketplace from the default branch of this repo.
+# See the marketplace's sample/.marketplace/app-info.yaml for every field.
+
+name: Orbit
+tagline: Reclaim disk space and keep your Mac tidy.
+
+description: |
+  Orbit is a native macOS app for reclaiming disk space. It scans your
+  system, shows exactly what is taking up room, and moves cleanup
+  candidates to the Trash so you can review before anything is gone for good.
+
+  Smart Care runs a one-click scan across the common junk categories:
+  system junk, user caches, Mail attachments and leftovers from uninstalled
+  apps. Developer cleanup covers Xcode (DerivedData, simulators, archives),
+  Homebrew, npm, Yarn, pnpm, Bun, Deno, Docker caches, Gradle, Maven,
+  Python, Rust and Go toolchains, and project build folders such as
+  node_modules, build and target.
+
+  Space Explorer shows where your disk space is going. Large & Old Files,
+  Duplicate Finder and Similar Photos reclaim space from forgotten files and
+  copies. The Uninstaller removes apps together with their support files,
+  containers and caches.
+
+  Scans are read-only, and Orbit only touches folders you explicitly choose.
+  Built with SwiftUI.
+
+category: Utilities
+
+supported_os:
+  - macos
+
+developer: Prateek Thakur
+website: https://github.com/prateekthakur272/Orbit
+support_url: https://github.com/prateekthakur272/Orbit/issues
+
+tags:
+  - disk-cleaner
+  - storage
+  - macos
+  - developer-tools
+  - uninstaller
+  - duplicate-finder
+  - swiftui
