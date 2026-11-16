@@ -17,10 +17,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Select Xcode 27
+      - name: Select Xcode
         uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: "27"
+          xcode-version: "26.6"
+
+      # The project was saved by Xcode 27 (objectVersion 110), but runners only
+      # have Xcode 26.x. preferredProjectObjectVersion is already 77, so drop
+      # the format on the CI checkout (not committed) so 26.6 can open it.
+      - name: Downgrade project format for Xcode 26
+        run: sed -i '' 's/objectVersion = 110;/objectVersion = 77;/' Orbit.xcodeproj/project.pbxproj
 
       - name: Build (unsigned Release)
         run: |
