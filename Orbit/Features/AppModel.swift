@@ -59,7 +59,13 @@ final class AppModel {
     private(set) var isCleaning = false
     var report: CleanupReport?
 
-    init() { refreshVolume() }
+    init() {
+        refreshVolume()
+        if let url = BookmarkStore.restore(key: "scope") {
+            scope = url
+            accessingScope = true
+        }
+    }
 
     // MARK: Volume
 
@@ -101,6 +107,7 @@ final class AppModel {
         if accessingScope { scope?.stopAccessingSecurityScopedResource() }
         accessingScope = url.startAccessingSecurityScopedResource()
         scope = url
+        BookmarkStore.save(url, key: "scope")
         result = nil
         selection = []
         phase = .idle

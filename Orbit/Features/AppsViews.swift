@@ -25,7 +25,7 @@ final class AppsModel {
     var plan: Plan?
     var report: DevCleanupReport?
     private(set) var isWorking = false
-    private var grantedRoots: [URL] = []
+    private var grantedRoots: [URL] = FolderPicker.restore(key: "applications").map { [$0] } ?? []
 
     var visibleApps: [AppInfo] {
         let q = searchText.trimmingCharacters(in: .whitespaces)
@@ -45,7 +45,7 @@ final class AppsModel {
     /// Reading and modifying /Applications under the sandbox needs the user to select it once.
     func grantApplicationsAccess() {
         guard let url = FolderPicker.choose(message: "Select the Applications folder so Orbit can list apps and, after your review, move them to the Trash.",
-                                            start: URL(fileURLWithPath: "/Applications")) else { return }
+                                            start: URL(fileURLWithPath: "/Applications"), key: "applications") else { return }
         grantedRoots.append(url)
         load()
     }

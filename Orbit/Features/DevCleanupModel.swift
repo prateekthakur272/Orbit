@@ -109,6 +109,12 @@ final class DevCleanupModel {
     @discardableResult
     func ensureAccess() -> Bool {
         if home != nil { return true }
+        if let url = BookmarkStore.restore(key: "home"),
+           url.standardizedFileURL.path == Self.realHome.standardizedFileURL.path {
+            accessing = true
+            home = url
+            return true
+        }
         let panel = NSOpenPanel()
         panel.directoryURL = Self.realHome
         panel.canChooseDirectories = true
@@ -123,6 +129,7 @@ final class DevCleanupModel {
         }
         accessMessage = nil
         accessing = url.startAccessingSecurityScopedResource()
+        BookmarkStore.save(url, key: "home")
         home = url
         return true
     }

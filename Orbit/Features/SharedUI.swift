@@ -6,9 +6,35 @@
 import AppKit
 import SwiftUI
 
+/// Persists sandbox access to user-picked folders across launches via app-scoped security bookmarks.
+enum BookmarkStore {
+    private static func defaultsKey(_ key: String) -> String { "bookmark.\(key)" }
+
+    static func save(_ url: URL, key: String) {
+        guard let data = try? url.bookmarkData(options: .withSecurityScope, includingResourceValuesForKeys: nil, relativeTo: nil) else { return }
+        UserDefaults.standard.set(data, forKey: defaultsKey(key))
+    }
+
+    /// Resolves a saved bookmark and starts security-scoped access. Returns nil if none/invalid.
+    static func restore(key: String) -> URL? {
+        guard let data = UserDefaults.standard.data(forKey: defaultsKey(key)) else { return nil }
+        var stale = false
+        guard let url = try? URL(resolvingBookmarkData: data, options: .withSecurityScope, relativeTo: nil, bookmarkDataIsStale: &stale),
+              url.startAccessingSecurityScopedResource() else {
+            UserDefaults.standard.removeObject(forKey: defaultsKey(key))
+            return nil
+        }
+        if stale { save(url, key: key) }
+        return url
+    }
+}
+
 enum FolderPicker {
     /// Shows the native folder picker. Returns the folder with security-scoped access started.
-    static func choose(message: String, start: URL? = nil, showHidden: Bool = false) -> URL? {
+    /// Pass `key` to remember the choice across launches (see `restore(key:)`).
+    static func restore(key: String) -> URL? { BookmarkStore.restore(key: key) }
+
+    static func choose(message: String, start: URL? = nil, showHidden: Bool = false, key: String? = nil) -> URL? {
         let panel = NSOpenPanel()
         panel.canChooseDirectories = true
         panel.canChooseFiles = false
@@ -19,6 +45,7 @@ enum FolderPicker {
         panel.message = message
         guard panel.runModal() == .OK, let url = panel.url else { return nil }
         _ = url.startAccessingSecurityScopedResource()
+        if let key { BookmarkStore.save(url, key: key) }
         return url
     }
 }
